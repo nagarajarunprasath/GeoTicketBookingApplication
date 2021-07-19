@@ -3,30 +3,25 @@ package TBA.utilities;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-/**
- * reads the properties file configuration.properties
- */
+/** reads the properties file configuration.properties */
 public class ConfigurationReader {
 
-    private static Properties properties;
+  private static Properties properties;
 
-    static {
+  static {
+    try {
+      String path = "configuration.properties";
+      FileInputStream input = new FileInputStream(path);
+      properties = new Properties();
+      properties.load(input);
 
-        try {
-            String path = "configuration.properties";
-            FileInputStream input = new FileInputStream(path);
-            properties = new Properties();
-            properties.load(input);
-
-            input.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
+      input.close();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 
-    public static String get(String keyName) {
-        return properties.getProperty(keyName);
-    }
-
+  public static String get(String keyName) {
+    return properties.getProperty(keyName);
+  }
 }
